@@ -1,0 +1,619 @@
+<html>
+
+<head>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZPLZLSSRN4"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-ZPLZLSSRN4');
+    </script>
+
+
+    <meta charset="utf-8" />
+    <title>STITCH 2.0</title>
+
+    <!-- TODO double check these are updated -->
+    <!-- Website Metadata -->
+    <meta content="Autonomous suturing with the da Vinci robot"
+        name="description" />
+    <meta content="STITCH 2.0: Extending Augmented Suturing with EKF Needle Estimation and Thread Management" property="og:title" />
+    <meta content="Autonomous suturing with the da Vinci robot"
+        property="og:description" />
+    <meta content="data/stitch2_preview_card.png" property="og:image" />
+    <meta content="STITCH 2.0: Extending Augmented Suturing with EKF Needle Estimation and Thread Management" property="twitter:title" />
+    <meta content="Autonomous suturing with the da Vinci robot"
+        property="twitter:description" />
+    <meta content="data/stitch2_preview_card.png" property="twitter:image" /> 
+    <meta property="og:type" content="website" />
+    <meta content="summary_large_image" name="twitter:card" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" /> 
+
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous" />
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+    <script
+        type="text/javascript">WebFont.load({ google: { families: ["Lato:100,100italic,300,300italic,400,400italic,700,700italic,900,900italic", "Montserrat:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic", "Ubuntu:300,300italic,400,400italic,500,500italic,700,700italic", "Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic", "Changa One:400,400italic", "Varela Round:400", "Bungee Shade:regular", "Roboto:300,regular,500", "Bungee Outline:regular"] } });</script>
+    <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif]-->
+
+    <!-- JQuery, scripts etc -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="script.js" type="text/javascript"></script>
+
+    <!-- Stylesheets; tabler icons, fonts, ...-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    
+    <!-- Carousel Styles -->
+    <style>
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .carousel-track-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+        
+        .carousel-track {
+            display: flex;
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .carousel-slide {
+            min-width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 50%;
+            z-index: 2;
+        }
+        
+        .carousel-button:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+        
+        .carousel-button--left {
+            left: 10px;
+        }
+        
+        .carousel-button--right {
+            right: 10px;
+        }
+        
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: none;
+            background: #ccc;
+            cursor: pointer;
+        }
+        
+        .carousel-indicator.current-slide {
+            background: #333;
+        }
+        
+        .video-caption {
+            margin-top: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        /* Icon Separator Styles */
+        .icon-separator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 2rem 0 0.5rem 0;
+        }
+        
+        .icon-separator img {
+            height: 24px;
+            width: auto;
+            opacity: 0.7;
+            object-fit: contain;
+        }
+    </style>
+    <link rel="icon" type="image/webp" href="data/favicon_comp.png" />
+</head>
+
+<body>
+    <div>
+        <!-- Title, Subtitle, Authors -->
+        <div>
+            <h1 class="title">
+                <span style="text-wrap: nowrap">STITCH 2.0</span>
+            </h1>
+            <h1 class="subheader">Extending Augmented Suturing with EKF Needle Estimation and Thread Management</h1>
+            <!-- Author list -->
+            <div class="base-row">
+                <!-- Refer to how author wrapping is performed in https://brentyi.github.io/tilted/ -->
+                <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+                    <div>
+                        <a href="https://kushtimusprime.github.io/" target="_blank" class="author-text">
+                            Kush Hari
+                        </a>
+                        <div style="width: 1.25em; display: inline-block"></div>
+                        <a href="https://ieeexplore.ieee.org/author/37089267647" target="_blank" class="author-text">
+                            Ziyang Chen
+                        </a>
+                        <div style="width: 1.25em; display: inline-block"></div>
+                        <a href="https://sites.google.com/view/isrlab/professor?authuser=0" target="_blank" class="author-text">
+                            Hansoul Kim
+                        </a>
+                        <div style="width: 1.25em; display: inline-block"></div>
+                        <a href="https://goldberg.berkeley.edu/" target="_blank" class="author-text">
+                            Ken Goldberg
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center">
+            <h1 id="uc-berkeley">UC Berkeley</h1>
+        </div>
+        <!-- Submission status -->
+        <div class="title-row">
+            <h2 class="subheader" style="font-size: 28px;">RA-L 2025</h2>
+        </div>
+
+        <!-- Paper / code / data URLs -->
+        <!-- TODO: Update arxiv/code/data link -->
+        <div class="base-row add-top-padding">
+            <!-- Paper -->
+            <a href="data/STITCH_2_0__Extending_Augmented_Suturing_with_EKF_Needle_Estimation_and_Thread_Management.pdf" target="_blank" class="link-block">
+                <figure>
+                    <img src="https://uploads-ssl.webflow.com/51e0d73d83d06baa7a00000f/5cab99df4998decfbf9e218e_paper-01.png"
+                        alt="paper"
+                        srcset="https://uploads-ssl.webflow.com/51e0d73d83d06baa7a00000f/5cab99df4998decfbf9e218e_paper-01-p-500.png"
+                        style="max-height: 4em" />
+                </figure>
+                <figcaption>
+                    <strong class="link-labels-text">Paper</strong>
+                </figcaption>
+            </a>
+            <!-- Code -->
+            <a href="#" target="_blank" class="link-block">
+                <figure>
+                    <img src="https://uploads-ssl.webflow.com/51e0d73d83d06baa7a00000f/5cae3b53b42ebb3dd4175a82_68747470733a2f2f7777772e69636f6e66696e6465722e636f6d2f646174612f69636f6e732f6f637469636f6e732f313032342f6d61726b2d6769746875622d3235362e706e67.png"
+                        alt="code" style="max-height: 4em" />
+                </figure>
+                <figcaption>
+                    <strong class="link-labels-text">Code (Coming Soon)</strong>
+                </figcaption>
+            </a>
+        </div>
+
+        <!-- TL;DR + Teaser video -->
+        <div class="section base-row add-top-padding">
+            <h1 class="tldr">
+                <b>TL;DR</b>:
+                <!-- train a mechanical eyeball to look around to enable manipulation tasks in a large workspace. -->
+                Autonomous suturing with the da Vinci robot
+            </h1>
+            <video id="main-video" autobuffer muted autoplay loop playsinline>
+                <source id="mp4" src="data/stitch2_teaser_vid_comp.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="section base-row add-top-padding">
+            <h1 class="tldr">
+                We developed an autonomous suturing pipeline using stereo images for 3D Suture Alignment, Needle Pose Estimation, and Augmented Dexterity Control.
+                   
+            </h1>
+            <img src="data/pipeline_figure.jpeg" style="max-width: 100%" />
+        </div>
+
+        <div class="icon-separator">
+            <img src="data/needle_icon.jpeg" alt="separator icon">
+            <img src="data/needle_icon.jpeg" alt="separator icon">
+            <img src="data/needle_icon.jpeg" alt="separator icon">
+        </div>
+        <div class="section base-row add-top-padding">
+            <h1>Augmented Dexterity</h1>
+            <p class="paragraph">
+                Given the high-risk nature of surgery, there are safety concerns about having fully autonomous robots perform surgical tasks like suturing. In contrast, <a href="https://www.science.org/doi/full/10.1126/scirobotics.adr5247" target="_blank">Augmented Dexterity</a> allows for robots handle specific subtasks autonomously, but with a human surgeon watching closely and ready to step in at a moment's notice.   
+            </p>
+            <p class="paragraph">
+                STITCH 2.0 embodies this approach. While it's designed as an autonomous suturing pipeline, it allows human surgeons to intervene and provide guidance on the fly, without having to stop and restart the entire system.
+            </p>
+            <div class="carousel-container">
+                <div class="carousel-track-container">
+                    <div class="carousel-track" id="augmented_dexterity_carousel">
+                        <div class="carousel-slide current-slide">
+                            <video loop muted playsinline style="width: 100%;" preload="none">
+                                <source data-src="data/augmented_dexterity_interventions/needle_alignment_aug_dex_comp.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="carousel-slide">
+                            <video loop muted playsinline style="width: 100%;" preload="none">
+                                <source data-src="data/augmented_dexterity_interventions/thread_aug_dex_comp.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-button carousel-button--left" data-carousel="limitations-carousel">
+                    <i class="ti ti-chevron-left"></i>
+                </button>
+                <button class="carousel-button carousel-button--right" data-carousel="limitations-carousel">
+                    <i class="ti ti-chevron-right"></i>
+                </button>
+                <div class="carousel-nav">
+                    <button class="carousel-indicator current-slide" data-slide="0"></button>
+                    <button class="carousel-indicator" data-slide="1"></button>
+                </div>
+            </div>
+
+        </div>
+        <div class="icon-separator">
+            <img src="data/needle_icon.jpeg" alt="separator icon">
+            <img src="data/needle_icon.jpeg" alt="separator icon">
+            <img src="data/needle_icon.jpeg" alt="separator icon">
+        </div>
+        <div class="section base-row add-top-padding">
+            <h1>STITCH 1.0 vs STITCH 2.0</h1>
+            <p>
+                STITCH 2.0 outperforms STITCH 1.0 by completing more sutures in less time.
+            </p>
+            <video loop autoplay muted playsinline style="width: 100%;" preload="none">
+                <source data-src="data/stitch1_stitch2_comparison_comp.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <p style="margin-top: 50px;">
+                Additionally, STITCH 2.0 delivers higher quality sutures that are evenly spaced and close the wound.
+            </p>
+            <img src="data/stitch1_stitch2_comparison.jpeg" style="width: 95%; display: block; margin: 20px auto; margin-top: -5px" alt="STITCH 1.0 vs STITCH 2.0" />
+        </div>
+        
+
+        <div class="icon-separator">
+            <img src="data/needle_icon.jpeg" alt="separator icon">
+            <img src="data/needle_icon.jpeg" alt="separator icon">
+            <img src="data/needle_icon.jpeg" alt="separator icon">
+        </div>
+        <div class="section base-row add-top-padding">
+            <h1>How it works</h1>
+            
+            <div class="separator"></div>
+            <p class="tldr"><b>3D Suture Alignment</b></p>
+            <p class="paragraph">
+                We determine the suture entry and exit points by segmenting the wound pointcloud and evenly distributing sutures along the wound.
+            </p>
+            <img src="data/suture_alignment_figure.jpeg" style="width: 95%; display: block; margin: 20px auto;" alt="How it works" />
+         
+            <div class="separator"></div>
+            <p class="tldr"><b>Needle Pose Estimation</b></p>
+            <p class="paragraph">
+                We estimate the needle pose by segmenting the needle pointcloud, fitting a 3D circle to it, and refining the tip position with an Extended Kalman Filter.  
+            </p>
+            <img src="data/needle_pose_estimation.jpeg" style="width: 95%; display: block; margin: 20px auto;" alt="How it works" />
+            <!--<p class="paragraph">
+                We train a U-Net for needle segmentation by painting the needle with UV paint and switching the lights to autonomously generate ground truth masks using <a href="https://sites.google.com/berkeley.edu/luv">LUV</a>.   
+            </p>
+            <video loop autoplay muted playsinline style="width: 100%;" preload="none">
+                <source data-src="data/teleop/real2simclip.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video> -->
+            <p class="tldr"><b>Augmented Dexterity Control</b></p>
+            <p class="paragraph">
+                Based on the suture alignment and needle pose estimation, we can perform autonomous suturing with 5 subtasks: needle insertion, thread slack management, needle extraction, needle handover, and needle alignment.
+            </p>
+            <div class="carousel-container">
+                <div class="carousel-track-container">
+                    <div class="carousel-track" id="augmented_dexterity_carousel">
+                        <div class="carousel-slide current-slide">
+                            <video loop muted playsinline style="width: 100%;" preload="none">
+                                <source data-src="data/augmented_dexterity_controller/needle_insertion_comp.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="carousel-slide">
+                            <video loop muted playsinline style="width: 100%;" preload="none">
+                                <source data-src="data/augmented_dexterity_controller/thread_sweeping_comp.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="carousel-slide">
+                            <video loop muted playsinline style="width: 100%;" preload="none">
+                                <source data-src="data/augmented_dexterity_controller/needle_extraction_comp.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="carousel-slide">
+                            <video loop muted playsinline style="width: 100%;" preload="none">
+                                <source data-src="data/augmented_dexterity_controller/needle_handover_comp.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="carousel-slide">
+                            <video loop muted playsinline style="width: 100%;" preload="none">
+                                <source data-src="data/augmented_dexterity_controller/needle_alignment_comp.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-button carousel-button--left" data-carousel="limitations-carousel">
+                    <i class="ti ti-chevron-left"></i>
+                </button>
+                <button class="carousel-button carousel-button--right" data-carousel="limitations-carousel">
+                    <i class="ti ti-chevron-right"></i>
+                </button>
+                <div class="carousel-nav">
+                    <button class="carousel-indicator current-slide" data-slide="0"></button>
+                    <button class="carousel-indicator" data-slide="1"></button>
+                    <button class="carousel-indicator" data-slide="2"></button>
+                    <button class="carousel-indicator" data-slide="3"></button>
+                    <button class="carousel-indicator" data-slide="4"></button>
+                </div>
+            </div>
+         </div>
+         <div class="icon-separator">
+            <img src="data/needle_icon.jpeg" alt="separator icon">
+            <img src="data/needle_icon.jpeg" alt="separator icon">
+            <img src="data/needle_icon.jpeg" alt="separator icon">
+        </div>
+
+        
+        <div class="section base-row add-top-padding">
+            <h1>Limitations</h1>
+            <p class="paragraph">STITCH 2.0 sometimes fails in needle insertion and handover alignment because of millimeter-level positioning errors stemming from the dVRK's cable-driven design. We performed a <a href="https://ieeexplore.ieee.org/abstract/document/9145695" target="_blank">deep calibration</a> to reduce the error under 1 mm, but even that level of precision isn't always enough.
+            </p>
+            <div class="carousel-container">
+                <div class="carousel-track-container">
+                    <div class="carousel-track" id="limitations-carousel">
+                        <div class="carousel-slide current-slide">
+                            <video loop muted playsinline style="width: 100%;" preload="none">
+                                <source data-src="data/failures/needle_insertion_failure_comp.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="carousel-slide">
+                            <video loop muted playsinline style="width: 100%;" preload="none">
+                                <source data-src="data/failures/needle_handover_error_comp.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-button carousel-button--left" data-carousel="limitations-carousel">
+                    <i class="ti ti-chevron-left"></i>
+                </button>
+                <button class="carousel-button carousel-button--right" data-carousel="limitations-carousel">
+                    <i class="ti ti-chevron-right"></i>
+                </button>
+                <div class="carousel-nav">
+                    <button class="carousel-indicator current-slide" data-slide="0"></button>
+                    <button class="carousel-indicator" data-slide="1"></button>
+                </div>
+            </div>
+
+
+        <div class="section" style="margin-top: 50px">
+            <h1>Acknowledgements</h1>
+            <p class="paragraph">
+                We thank Madison Veliky, Chung Min Kim, and Justin Kerr for their feedback on paper drafts and insightful conversations about the project. We thank Intuitive Surgical and the National Science Foundation for the dVRK. 
+            </p>
+            <p class="paragraph">
+                The da Vinci Research Kit was supported by the National Science Foundation, via the National Robotics Initiative (NRI) and in part by the collaborative research project "Software Framework for Research in Semi-Autonomous Teleoperation" between The Johns Hopkins University (IIS 1637789), Worcester Polytechnic Institute (IIS 1637759), and in part by the University of Washington (IIS 1637444).
+            </p>
+        </div>
+
+        <div class="section citation" style="margin-top: 50px">
+            <h1 id="abstract">Citation </h1>
+            <p class="paragraph"> If you use this work or find it helpful, please consider citing: (bibtex) </p>
+            <!-- <pre id="codecell0" style="white-space: pre-wrap; word-wrap: break-word; max-width: 100%; overflow-x: auto; padding: 1em; background: #f5f5f5; border-radius: 4px;">Coming soon!</pre> -->
+            <pre id="codecell0" style="white-space: pre-wrap; word-wrap: break-word; max-width: 100%; overflow-x: auto; padding: 1em; background: #f5f5f5; border-radius: 4px;">@article{hari2025stitch,
+  title={STITCH 2.0: Extending Augmented Suturing with EKF Needle Estimation and Thread Management},
+  author={Hari, Kush and Chen, Ziyang and Kim, Hansoul and Goldberg, Ken},
+  journal={IEEE Robotics and Automation Letters},
+  year={2025},
+  publisher={IEEE}
+}</pre>
+        </div>
+        <footer>
+            <div class="section" style="margin-top: 40px;">
+                <p class="paragraph">
+                    The website template is adapted from the <a class="author-text" href="https://www.eyerobot.net" target="_blank">Eye, Robot</a>
+                    project page.
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Carousel JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            const initializeCarousel = (carouselContainer) => {
+                const track = carouselContainer.querySelector('.carousel-track');
+                if (!track) return;
+
+                const slides = Array.from(track.children);
+                const nextButton = carouselContainer.querySelector('.carousel-button--right');
+                const prevButton = carouselContainer.querySelector('.carousel-button--left');
+                const dotsNav = carouselContainer.querySelector('.carousel-nav');
+                const dots = dotsNav ? Array.from(dotsNav.children) : [];
+                
+                let currentSlideIndex = 0;
+
+                const loadVideo = (video) => {
+                    const sources = video.querySelectorAll('source[data-src]');
+                    if (sources.length > 0) {
+                        sources.forEach(source => {
+                            source.src = source.dataset.src;
+                            source.removeAttribute('data-src');
+                        });
+                        video.load();
+                    }
+                };
+                
+                // Function to move to a specific slide
+                const moveToSlide = (targetIndex) => {
+                    if (targetIndex < 0 || targetIndex >= slides.length) return;
+
+                    // Pause current videos
+                    if (slides[currentSlideIndex]) {
+                        const currentVideos = slides[currentSlideIndex].querySelectorAll('video');
+                        currentVideos.forEach(video => {
+                            video.pause();
+                        });
+                    }
+                    
+                    const targetSlide = slides[targetIndex];
+
+                    // Load video for target slide
+                    const newVideos = targetSlide.querySelectorAll('video');
+                    newVideos.forEach(video => {
+                        loadVideo(video);
+                        video.play().catch(e => {
+                            // Autoplay was prevented.
+                            console.log('Autoplay was prevented:', e);
+                        });
+                    });
+                    
+                    // Update current slide
+                    if (slides[currentSlideIndex]) {
+                        slides[currentSlideIndex].classList.remove('current-slide');
+                    }
+                    targetSlide.classList.add('current-slide');
+                    
+                    // Update dots
+                    if (dots.length > 0 && dots[currentSlideIndex]) {
+                        dots[currentSlideIndex].classList.remove('current-slide');
+                        dots[targetIndex].classList.add('current-slide');
+                    }
+                    
+                    // Move the track
+                    const slideWidth = slides[0].getBoundingClientRect().width;
+                    track.style.transform = `translateX(-${slideWidth * targetIndex}px)`;
+                    
+                    currentSlideIndex = targetIndex;
+                };
+                
+                // Next button functionality
+                if (nextButton) {
+                    nextButton.addEventListener('click', () => {
+                        const nextIndex = (currentSlideIndex + 1) % slides.length;
+                        moveToSlide(nextIndex);
+                    });
+                }
+                
+                // Previous button functionality
+                if (prevButton) {
+                    prevButton.addEventListener('click', () => {
+                        const prevIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+                        moveToSlide(prevIndex);
+                    });
+                }
+                
+                // Dot navigation functionality
+                if (dots.length > 0) {
+                    dots.forEach((dot, index) => {
+                        dot.addEventListener('click', () => {
+                            moveToSlide(index);
+                        });
+                    });
+                }
+                
+                // Pause other videos when one starts playing
+                slides.forEach((slide, index) => {
+                    const videos = slide.querySelectorAll('video');
+                    videos.forEach(video => {
+                        video.addEventListener('play', () => {
+                            // Pause all other videos in this carousel
+                            slides.forEach((otherSlide, otherIndex) => {
+                                if (otherIndex !== index) {
+                                    const otherVideos = otherSlide.querySelectorAll('video');
+                                    otherVideos.forEach(otherVideo => {
+                                        otherVideo.pause();
+                                    });
+                                }
+                            });
+                        });
+                    });
+                });
+                
+                // Autoplay the first video when page loads
+                if (slides.length > 0 && slides[0]) {
+                    const firstVideos = slides[0].querySelectorAll('video');
+                    firstVideos.forEach(video => {
+                        loadVideo(video);
+                        video.play().catch(e => {
+                            // Handle autoplay policy restrictions
+                            console.log('Autoplay was prevented:', e);
+                        });
+                    });
+                }
+            };
+
+            // Initialize all carousels on the page
+            const carousels = document.querySelectorAll('.carousel-container');
+            carousels.forEach(initializeCarousel);
+
+            // Lazy load videos that are not in a carousel
+            const lazyVideos = [].slice.call(document.querySelectorAll('video:not(.carousel-track video)'));
+
+            if ('IntersectionObserver' in window) {
+                let lazyVideoObserver = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(function(videoEntry) {
+                    if (videoEntry.isIntersecting) {
+                    let video = videoEntry.target;
+                    let sources = video.querySelectorAll('source[data-src]');
+                    sources.forEach(source => {
+                        if (source.dataset.src) {
+                        source.src = source.dataset.src;
+                        source.removeAttribute('data-src');
+                        }
+                    });
+                    video.load();
+                    video.play().catch(e => console.log("Autoplay for non-carousel video prevented.", e));
+                    lazyVideoObserver.unobserve(video);
+                    }
+                });
+                });
+
+                lazyVideos.forEach(function(video) {
+                lazyVideoObserver.observe(video);
+                });
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>

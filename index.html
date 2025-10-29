@@ -140,7 +140,7 @@
         }
         
         .icon-separator img {
-            height: 24px;
+            height: 28px;
             width: auto;
             opacity: 0.7;
             object-fit: contain;
@@ -227,13 +227,13 @@
                 <source id="mp4" src="data/stitch2_teaser_vid_comp.mp4" type="video/mp4">
             </video>
         </div>
-        <div class="section base-row add-top-padding">
+        <!-- <div class="section base-row add-top-padding">
             <h1 class="tldr">
                 We developed an autonomous suturing pipeline using stereo images for 3D Suture Alignment, Needle Pose Estimation, and Augmented Dexterity Control.
                    
             </h1>
             <img src="data/pipeline_figure.jpeg" style="max-width: 100%" />
-        </div>
+        </div> -->
 
         <div class="icon-separator">
             <img src="data/needle_icon.jpeg" alt="separator icon">
@@ -241,39 +241,25 @@
             <img src="data/needle_icon.jpeg" alt="separator icon">
         </div>
         <div class="section base-row add-top-padding">
-            <h1>Augmented Dexterity</h1>
-            <p class="paragraph">
+            <h1 style="margin-bottom: 5px;">Augmented Dexterity</h1>
+            <p class="paragraph" style="margin-top: 5px;">
                 Given the high-risk nature of surgery, there are safety concerns about having fully autonomous robots perform surgical tasks like suturing. In contrast, <a href="https://www.science.org/doi/full/10.1126/scirobotics.adr5247" target="_blank">Augmented Dexterity</a> allows for robots handle specific subtasks autonomously, but with a human surgeon watching closely and ready to step in at a moment's notice.   
             </p>
             <p class="paragraph">
                 STITCH 2.0 embodies this approach. While it's designed as an autonomous suturing pipeline, it allows human surgeons to intervene and provide guidance on the fly, without having to stop and restart the entire system.
             </p>
-            <div class="carousel-container">
-                <div class="carousel-track-container">
-                    <div class="carousel-track" id="augmented_dexterity_carousel">
-                        <div class="carousel-slide current-slide">
-                            <video loop muted playsinline style="width: 100%;" preload="none">
-                                <source data-src="data/augmented_dexterity_interventions/needle_alignment_aug_dex_comp.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
-                        <div class="carousel-slide">
-                            <video loop muted playsinline style="width: 100%;" preload="none">
-                                <source data-src="data/augmented_dexterity_interventions/thread_aug_dex_comp.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
-                    </div>
+            <div class="video-container">
+                <div class="video-item">
+                    <video loop autoplay muted playsinline preload="none">
+                        <source src="data/augmented_dexterity_interventions/needle_alignment_aug_dex_comp.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
-                <button class="carousel-button carousel-button--left" data-carousel="limitations-carousel">
-                    <i class="ti ti-chevron-left"></i>
-                </button>
-                <button class="carousel-button carousel-button--right" data-carousel="limitations-carousel">
-                    <i class="ti ti-chevron-right"></i>
-                </button>
-                <div class="carousel-nav">
-                    <button class="carousel-indicator current-slide" data-slide="0"></button>
-                    <button class="carousel-indicator" data-slide="1"></button>
+                <div class="video-item">
+                    <video loop autoplay muted playsinline preload="none">
+                        <source src="data/augmented_dexterity_interventions/thread_aug_dex_comp.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
             </div>
 
@@ -284,8 +270,9 @@
             <img src="data/needle_icon.jpeg" alt="separator icon">
         </div>
         <div class="section base-row add-top-padding">
-            <h1>STITCH 1.0 vs STITCH 2.0</h1>
-            <p>
+            <h1 style="margin-bottom: 5px;">STITCH 1.0 vs STITCH 2.0</h1>
+            <!-- TODO: Merge image into this video so it's less cluttered-->
+            <p style="margin-top: 5px;">
                 STITCH 2.0 outperforms STITCH 1.0 by completing more sutures in less time.
             </p>
             <video loop autoplay muted playsinline style="width: 100%;" preload="none">
@@ -305,18 +292,18 @@
             <img src="data/needle_icon.jpeg" alt="separator icon">
         </div>
         <div class="section base-row add-top-padding">
-            <h1>How it works</h1>
-            
-            <div class="separator"></div>
-            <p class="tldr"><b>3D Suture Alignment</b></p>
-            <p class="paragraph">
+            <h1 style="margin-bottom: 0px;">How it works</h1>
+            <!-- TODO: Make videos of these figures-->
+            <div class="separator" style="margin-top: 0px; margin-bottom: 5px;"></div>
+            <p class="tldr" style="margin-bottom: 5px; margin-top: 0px;"><b>3D Suture Alignment</b></p>
+            <p class="paragraph" style="margin-top: 5px;">
                 We determine the suture entry and exit points by segmenting the wound pointcloud and evenly distributing sutures along the wound.
             </p>
             <img src="data/suture_alignment_figure.jpeg" style="width: 95%; display: block; margin: 20px auto;" alt="How it works" />
          
             <div class="separator"></div>
-            <p class="tldr"><b>Needle Pose Estimation</b></p>
-            <p class="paragraph">
+            <p class="tldr" style="margin-bottom: 5px;"><b>Needle Pose Estimation</b></p>
+            <p class="paragraph" style="margin-top: 5px;">
                 We estimate the needle pose by segmenting the needle pointcloud, fitting a 3D circle to it, and refining the tip position with an Extended Kalman Filter.  
             </p>
             <img src="data/needle_pose_estimation.jpeg" style="width: 95%; display: block; margin: 20px auto;" alt="How it works" />
@@ -327,8 +314,8 @@
                 <source data-src="data/teleop/real2simclip.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video> -->
-            <p class="tldr"><b>Augmented Dexterity Control</b></p>
-            <p class="paragraph">
+            <p class="tldr" style="margin-bottom: 5px;"><b>Augmented Dexterity Control</b></p>
+            <p class="paragraph" style="margin-top: 5px;">
                 Based on the suture alignment and needle pose estimation, we can perform autonomous suturing with 5 subtasks: needle insertion, thread slack management, needle extraction, needle handover, and needle alignment.
             </p>
             <div class="carousel-container">
@@ -387,44 +374,30 @@
             <img src="data/needle_icon.jpeg" alt="separator icon">
         </div>
 
-        
+
         <div class="section base-row add-top-padding">
-            <h1>Limitations</h1>
-            <p class="paragraph">STITCH 2.0 sometimes fails in needle insertion and handover alignment because of millimeter-level positioning errors stemming from the dVRK's cable-driven design. We performed a <a href="https://ieeexplore.ieee.org/abstract/document/9145695" target="_blank">deep calibration</a> to reduce the error under 1 mm, but even that level of precision isn't always enough.
+            <h1 style="margin-bottom: 5px;">Limitations</h1>
+            <p class="paragraph" style="margin-top: 5px;">STITCH 2.0 sometimes fails in needle insertion and handover alignment because of millimeter-level positioning errors stemming from the dVRK's cable-driven design. We performed a <a href="https://ieeexplore.ieee.org/abstract/document/9145695" target="_blank">deep calibration</a> to reduce the error under 1 mm, but even that level of precision isn't always enough.
             </p>
-            <div class="carousel-container">
-                <div class="carousel-track-container">
-                    <div class="carousel-track" id="limitations-carousel">
-                        <div class="carousel-slide current-slide">
-                            <video loop muted playsinline style="width: 100%;" preload="none">
-                                <source data-src="data/failures/needle_insertion_failure_comp.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
-                        <div class="carousel-slide">
-                            <video loop muted playsinline style="width: 100%;" preload="none">
-                                <source data-src="data/failures/needle_handover_error_comp.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
-                    </div>
+            <div class="video-container">
+                <div class="video-item">
+                    <video loop autoplay muted playsinline preload="none">
+                        <source src="data/failures/needle_insertion_failure_comp.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
-                <button class="carousel-button carousel-button--left" data-carousel="limitations-carousel">
-                    <i class="ti ti-chevron-left"></i>
-                </button>
-                <button class="carousel-button carousel-button--right" data-carousel="limitations-carousel">
-                    <i class="ti ti-chevron-right"></i>
-                </button>
-                <div class="carousel-nav">
-                    <button class="carousel-indicator current-slide" data-slide="0"></button>
-                    <button class="carousel-indicator" data-slide="1"></button>
+                <div class="video-item">
+                    <video loop autoplay muted playsinline preload="none">
+                        <source src="data/failures/needle_handover_error_comp.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
             </div>
 
 
         <div class="section" style="margin-top: 50px">
-            <h1>Acknowledgements</h1>
-            <p class="paragraph">
+            <h1 style="margin-bottom: 5px;">Acknowledgements</h1>
+            <p class="paragraph" style="margin-top: 5px;">
                 We thank Madison Veliky, Chung Min Kim, and Justin Kerr for their feedback on paper drafts and insightful conversations about the project. We thank Intuitive Surgical and the National Science Foundation for the dVRK. 
             </p>
             <p class="paragraph">
@@ -433,8 +406,8 @@
         </div>
 
         <div class="section citation" style="margin-top: 50px">
-            <h1 id="abstract">Citation </h1>
-            <p class="paragraph"> If you use this work or find it helpful, please consider citing: (bibtex) </p>
+            <h1 id="abstract" style="margin-bottom: 5px;">Citation </h1>
+            <p class="paragraph" style="margin-top: 5px; text-align: left;"> If you use this work or find it helpful, please consider citing: (bibtex) </p>
             <!-- <pre id="codecell0" style="white-space: pre-wrap; word-wrap: break-word; max-width: 100%; overflow-x: auto; padding: 1em; background: #f5f5f5; border-radius: 4px;">Coming soon!</pre> -->
             <pre id="codecell0" style="white-space: pre-wrap; word-wrap: break-word; max-width: 100%; overflow-x: auto; padding: 1em; background: #f5f5f5; border-radius: 4px;">@article{hari2025stitch,
   title={STITCH 2.0: Extending Augmented Suturing with EKF Needle Estimation and Thread Management},
@@ -447,7 +420,7 @@
         <footer>
             <div class="section" style="margin-top: 40px;">
                 <p class="paragraph">
-                    The website template is adapted from the <a class="author-text" href="https://www.eyerobot.net" target="_blank">Eye, Robot</a>
+                    The website template is adapted from the <a class="author-text" href="https://www.eyerobot.net" target="_blank" style="font-size: 16px;">Eye, Robot</a>
                     project page.
                 </p>
             </div>

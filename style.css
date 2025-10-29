@@ -192,7 +192,7 @@ display: none;
 .author-text {
     font-family: 'Open Sans',sans-serif;
     color: #488af3;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 400;
     text-decoration: none;
     text-wrap: nowrap;
@@ -211,7 +211,7 @@ display: none;
     padding-top: 10px;
     font-family: 'Open Sans',sans-serif;
     color: #333;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 400;
     margin: 0px;
     letter-spacing: 0;
@@ -330,7 +330,7 @@ display: none;
     line-height: 24px;
     font-weight: 400;
     letter-spacing: 0;
-    text-align: left;
+    text-align: center;
     display: block;
     width: 100%;
 }
